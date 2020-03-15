@@ -117,20 +117,17 @@ class AtariEnv(gym.Env, utils.EzPickle):
         action = self._action_set[a] # 매 step마다의 action값
         # action = 0 -> pause
         
-        # weight = {}
-        # weight['W'] = uniform(-1, 1)
-        # weight['b'] = uniform(-1, 1)
+        weight = {}
+        weight['W'] = uniform(-1, 1)
+        weight['b'] = uniform(-1, 1)
 
-        # a = weight['W']*num_step + weight['b']
-        # prob = sigmoid(a)
-        # # print('weight:',weight)
-        # rand_num = random()
-        # if rand_num < prob:
-        #     action=0
-        import random
-        rand_num = random.randint(1,1000)
-        if rand_num < num_step:
+        a = weight['W']*num_step + weight['b']
+        prob = sigmoid(a)
+        # print('weight:',weight)
+        rand_num = random()
+        if rand_num < prob:
             action=0
+
         # print('rand_num:',rand_num)
         # print('prob:',prob)
         # print('action:',action)
